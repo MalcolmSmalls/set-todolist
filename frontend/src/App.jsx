@@ -5,10 +5,15 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Task List</h1>
-      <TaskList />
-    </>
+    <main className='dark:bg-black bg-gray-800 w-full h-screen text-white'>
+      <div className='flex justify-center items-center pt-20 flex-col gap-10'>
+        <h1 className='text-4xl uppercase tracking-widest font-bold'>
+          Task List
+        </h1>
+
+        <TaskList />
+      </div>
+    </main>
   )
 }
 
