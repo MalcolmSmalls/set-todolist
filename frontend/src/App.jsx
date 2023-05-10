@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TaskList from './components/TaskList'
+import AddTaskModal from './components/AddTaskModal'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +14,7 @@ function App() {
         <button className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-10 uppercase font-bold hover:bg-gray-950 hover:text-white'>
           <i className='fas fa-plus pr-2'></i>Add Task
         </button>
+        <AddTaskModal />
 
         <TaskList />
       </div>
