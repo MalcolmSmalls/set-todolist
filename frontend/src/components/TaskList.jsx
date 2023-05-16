@@ -17,14 +17,11 @@ export default function TaskList() {
   ])
 
   const minusSet = (id) => {
-    // console.log(id)
-    // setTasks((prevTasks) => {
-    //   prevTasks.forEach((item) => {
-    //     if (item.id === id) {
-    //       item.sets--
-    //     }
-    //   })
-    // })
+    setTasks((prevTasks) => {
+      return prevTasks.map((item) => {
+        return item.id === +id ? { ...item, sets: item.sets - 1 } : item
+      })
+    })
   }
   return (
     <div className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit'>
