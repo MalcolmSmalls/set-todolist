@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function AddTaskModal({ closeModal }) {
-  const handleChange = () => {
-    console.log('hey')
+  const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
+  console.log(newTask)
+  const handleChange = (e) => {
+    setNewTask((prevTask) => {
+      return { ...prevTask, [e.target.name]: e.target.value }
+    })
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
@@ -18,17 +22,22 @@ export default function AddTaskModal({ closeModal }) {
         <div className='body pt-5 flex flex-col gap-5 w-1/2 items-center pb-5'>
           <input
             placeHolder='Task Name'
-            className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300'
+            className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
+            name='task'
             onChange={handleChange}
           />
           <div className='flex gap-5'>
             <input
               placeHolder='Sets'
-              className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300'
+              className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
+              name='sets'
+              onChange={handleChange}
             />
             <input
               placeHolder='Minutes per set'
-              className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300'
+              className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
+              name='time'
+              onChange={handleChange}
             />
           </div>
         </div>
