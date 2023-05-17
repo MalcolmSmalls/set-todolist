@@ -25,6 +25,7 @@ export default function AddTaskModal({ closeModal }) {
             className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
             name='task'
             onChange={handleChange}
+            value={newTask.task}
           />
           <div className='flex gap-5'>
             <input
@@ -32,12 +33,14 @@ export default function AddTaskModal({ closeModal }) {
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='sets'
               onChange={handleChange}
+              value={newTask.sets}
             />
             <input
               placeHolder='Minutes per set'
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='time'
               onChange={handleChange}
+              value={newTask.time}
             />
           </div>
         </div>
