@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function AddTaskModal({ closeModal }) {
+  const handleChange = () => {
+    console.log('hey')
+  }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
       <div className='modalContainer bg-gray-900 w-1/2 h-96 flex flex-col items-center rounded-lg gap-5 shadow-2xl'>
@@ -16,6 +19,7 @@ export default function AddTaskModal({ closeModal }) {
           <input
             placeHolder='Task Name'
             className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300'
+            onChange={handleChange}
           />
           <div className='flex gap-5'>
             <input
