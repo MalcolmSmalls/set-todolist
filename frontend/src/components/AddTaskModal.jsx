@@ -4,16 +4,19 @@ export default function AddTaskModal({ closeModal, setTasks }) {
   const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
 
   const handleChange = (e) => {
+    const { name, value, type, checked } = e.target
     setNewTask((prevTask) => {
-      return { ...prevTask, [e.target.name]: e.target.value }
+      return { ...prevTask, [name]: type === 'checkbox' ? checked : value }
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     setTasks((prevTasks) => [
       ...prevTasks,
       { task: newTask.task, sets: newTask.sets, time: newTask.time },
     ])
+    closeModal(false)
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
@@ -26,7 +29,10 @@ export default function AddTaskModal({ closeModal, setTasks }) {
         <div className='title'>
           <h1 className='uppercase text-xl'>Add A Task</h1>
         </div>
-        <div className='body pt-5 flex flex-col gap-5 w-1/2 items-center pb-5'>
+        <form
+          className='body pt-5 flex flex-col gap-5 w-1/2 items-center pb-5'
+          onSubmit={handleSubmit}
+        >
           <input
             placeHolder='Task Name'
             className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
@@ -50,21 +56,19 @@ export default function AddTaskModal({ closeModal, setTasks }) {
               value={newTask.time}
             />
           </div>
-        </div>
-        <div className='footer'>
-          <button
-            className='bg-red-500 p-3 rounded-lg w-36 mr-5 hover:bg-red-600'
-            onClick={() => closeModal(false)}
-          >
-            Cancel
-          </button>
-          <button
-            className='bg-green-500 p-3 rounded-lg w-36 hover:bg-green-600'
-            onClick={handleSubmit}
-          >
-            Add Task
-          </button>
-        </div>
+          <div className='footer'>
+            <button className='bg-green-500 p-3 rounded-lg w-36 mr-5 hover:bg-green-600'>
+              Add Task
+            </button>
+            <button
+              type='button'
+              className='bg-red-500 p-3 rounded-lg w-36  hover:bg-red-600'
+              onClick={() => closeModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   )
