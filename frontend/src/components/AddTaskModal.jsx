@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 
-export default function AddTaskModal({ closeModal }) {
+export default function AddTaskModal({ closeModal, setTasks }) {
   const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
-  console.log(newTask)
+
   const handleChange = (e) => {
     setNewTask((prevTask) => {
       return { ...prevTask, [e.target.name]: e.target.value }
     })
+  }
+
+  const handleSubmit = () => {
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { task: newTask.task, sets: newTask.sets, time: newTask.time },
+    ])
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
@@ -51,7 +58,10 @@ export default function AddTaskModal({ closeModal }) {
           >
             Cancel
           </button>
-          <button className='bg-green-500 p-3 rounded-lg w-36 hover:bg-green-600'>
+          <button
+            className='bg-green-500 p-3 rounded-lg w-36 hover:bg-green-600'
+            onClick={handleSubmit}
+          >
             Add Task
           </button>
         </div>

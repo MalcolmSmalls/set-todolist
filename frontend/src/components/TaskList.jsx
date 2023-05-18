@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 
-export default function TaskList() {
-  const [tasks, setTasks] = useState([
-    { task: 'Get Money', sets: 5, id: 1 },
-    { task: 'Bicep Curls', sets: 4, id: 2 },
-    { task: 'Read', time: '5hrs', id: 3 },
-    { task: 'Pushups', sets: 2, id: 4 },
-    { task: 'Get Money', sets: 5, id: 5 },
-    { task: 'Bicep Curls', sets: 4, id: 6 },
-    { task: 'Read', time: '5hrs', id: 7 },
-    { task: 'Pushups', sets: 2, id: 8 },
-    { task: 'Get Money', sets: 5, id: 9 },
-    { task: 'Bicep Curls', sets: 4, id: 10 },
-    { task: 'Read', time: '5hrs', id: 11 },
-    { task: 'Pushups', sets: 2, id: 12 },
-  ])
+export default function TaskList({ tasks, setTasks }) {
+  // const [tasks, setTasks] = useState([
+  //   { task: 'Get Money', sets: 5, id: 1 },
+  //   { task: 'Bicep Curls', sets: 4, id: 2 },
+  //   { task: 'Read', time: '5hrs', id: 3 },
+  //   { task: 'Pushups', sets: 2, id: 4 },
+  //   { task: 'Get Money', sets: 5, id: 5 },
+  //   { task: 'Bicep Curls', sets: 4, id: 6 },
+  //   { task: 'Read', time: '5hrs', id: 7 },
+  //   { task: 'Pushups', sets: 2, id: 8 },
+  //   { task: 'Get Money', sets: 5, id: 9 },
+  //   { task: 'Bicep Curls', sets: 4, id: 10 },
+  //   { task: 'Read', time: '5hrs', id: 11 },
+  //   { task: 'Pushups', sets: 2, id: 12 },
+  // ])
 
   const minusSet = (id) => {
     setTasks((prevTasks) => {

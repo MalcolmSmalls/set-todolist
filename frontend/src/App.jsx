@@ -4,6 +4,20 @@ import AddTaskModal from './components/AddTaskModal'
 
 function App() {
   const [openModal, setOpenModal] = useState(false)
+  const [tasks, setTasks] = useState([
+    { task: 'Get Money', sets: 5, id: 1 },
+    { task: 'Bicep Curls', sets: 4, id: 2 },
+    { task: 'Read', time: '5hrs', id: 3 },
+    { task: 'Pushups', sets: 2, id: 4 },
+    { task: 'Get Money', sets: 5, id: 5 },
+    { task: 'Bicep Curls', sets: 4, id: 6 },
+    { task: 'Read', time: '5hrs', id: 7 },
+    { task: 'Pushups', sets: 2, id: 8 },
+    { task: 'Get Money', sets: 5, id: 9 },
+    { task: 'Bicep Curls', sets: 4, id: 10 },
+    { task: 'Read', time: '5hrs', id: 11 },
+    { task: 'Pushups', sets: 2, id: 12 },
+  ])
 
   return (
     <main className='dark:bg-black bg-gray-800 w-full h-fit text-white font-Poppins'>
@@ -17,9 +31,11 @@ function App() {
         >
           <i className='fas fa-plus pr-2'></i>Add Task
         </button>
-        {openModal && <AddTaskModal closeModal={setOpenModal} />}
+        {openModal && (
+          <AddTaskModal closeModal={setOpenModal} setTasks={setTasks} />
+        )}
 
-        <TaskList />
+        <TaskList tasks={tasks} setTasks={setTasks} />
       </div>
     </main>
   )
