@@ -5,18 +5,18 @@ import AddTaskModal from './components/AddTaskModal'
 function App() {
   const [openModal, setOpenModal] = useState(false)
   const [tasks, setTasks] = useState([
-    { task: 'Get Money', sets: 5, id: 1 },
-    { task: 'Bicep Curls', sets: 4, id: 2 },
-    { task: 'Read', time: '5hrs', id: 3 },
-    { task: 'Pushups', sets: 2, id: 4 },
-    { task: 'Get Money', sets: 5, id: 5 },
-    { task: 'Bicep Curls', sets: 4, id: 6 },
-    { task: 'Read', time: '5hrs', id: 7 },
-    { task: 'Pushups', sets: 2, id: 8 },
-    { task: 'Get Money', sets: 5, id: 9 },
-    { task: 'Bicep Curls', sets: 4, id: 10 },
-    { task: 'Read', time: '5hrs', id: 11 },
-    { task: 'Pushups', sets: 2, id: 12 },
+    { task: 'Get Money', sets: 5, id: 1, completed: false },
+    { task: 'Bicep Curls', sets: 4, id: 2, completed: false },
+    { task: 'Read', time: '5hrs', id: 3, completed: false },
+    { task: 'Pushups', sets: 2, id: 4, completed: false },
+    { task: 'Get Money', sets: 5, id: 5, completed: false },
+    { task: 'Bicep Curls', sets: 4, id: 6, completed: false },
+    { task: 'Read', time: '5hrs', id: 7, completed: false },
+    { task: 'Pushups', sets: 2, id: 8, completed: false },
+    { task: 'Get Money', sets: 5, id: 9, completed: false },
+    { task: 'Bicep Curls', sets: 4, id: 10, completed: false },
+    { task: 'Read', time: '5hrs', id: 11, completed: false },
+    { task: 'Pushups', sets: 2, id: 12, completed: false },
   ])
 
   return (

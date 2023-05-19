@@ -19,51 +19,59 @@ export default function TaskList({ tasks, setTasks }) {
   const minusSet = (id) => {
     setTasks((prevTasks) => {
       return prevTasks.map((item) => {
+        if (item.id === +id && item.sets === 0) {
+          return { ...item, completed: true }
+        }
         return item.id === +id ? { ...item, sets: item.sets - 1 } : item
       })
     })
   }
   return (
     <div className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit'>
-      {tasks.map((item) => (
-        <div key={item.id} className='border-b border-b-gray-200/10 border-b-1'>
-          <li className='list-none p-3 text-sm flex gap-4 items-center justify-center w-full'>
-            <div className='ml-5 rounded-full border-2 w-5 h-5'></div>
-            <div className='w-fit'>
-              {item.task}
-              <span className='text-indigo-500 text-xs'>
-                {' '}
-                x{' '}
-                <span className='font-bold'>
-                  {item.sets} {item.sets > 1 ? 'sets' : 'set'}
-                  {item.time}
+      {tasks.map((item) =>
+        item.completed === false ? (
+          <div
+            key={item.id}
+            className='border-b border-b-gray-200/10 border-b-1'
+          >
+            <li className='list-none p-3 text-sm flex gap-4 items-center justify-center w-full'>
+              <div className='ml-5 rounded-full border-2 w-5 h-5'></div>
+              <div className='w-fit'>
+                {item.task}
+                <span className='text-indigo-500 text-xs'>
+                  {' '}
+                  x{' '}
+                  <span className='font-bold'>
+                    {item.sets} {item.sets > 1 ? 'sets' : 'set'}
+                    {item.time}
+                  </span>
                 </span>
-              </span>
-            </div>
-            <div className='ml-auto w-1/3  flex justify-center'>
-              {item.time ? (
-                <button
-                  className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
+              </div>
+              <div className='ml-auto w-1/3  flex justify-center'>
+                {item.time ? (
+                  <button
+                    className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
                 hover:border-indigo-500 
                  hover:text-white '
-                >
-                  Start Time
-                </button>
-              ) : (
-                <button
-                  id={item.id}
-                  className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
+                  >
+                    Start Time
+                  </button>
+                ) : (
+                  <button
+                    id={item.id}
+                    className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
                   hover:border-indigo-500 
                    hover:text-white '
-                  onClick={(e) => minusSet(e.target.id)}
-                >
-                  Minus Set
-                </button>
-              )}
-            </div>
-          </li>
-        </div>
-      ))}
+                    onClick={(e) => minusSet(e.target.id)}
+                  >
+                    Minus Set
+                  </button>
+                )}
+              </div>
+            </li>
+          </div>
+        ) : null
+      )}
     </div>
   )
 }
