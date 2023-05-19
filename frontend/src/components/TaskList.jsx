@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function TaskList({ tasks, setTasks }) {
   // const [tasks, setTasks] = useState([
@@ -16,15 +16,18 @@ export default function TaskList({ tasks, setTasks }) {
   //   { task: 'Pushups', sets: 2, id: 12 },
   // ])
 
+  useEffect(() => {
+    setTasks((prevTasks) =>
+      prevTasks.map((item) =>
+        item.sets === 0 ? { ...item, completed: true } : item
+      )
+    )
+  }, tasks)
   const minusSet = (id) => {
     setTasks((prevTasks) => {
       return prevTasks.map((item) => {
         if (item.id === +id) {
-          if (item.sets === 1) {
-            return { ...item, completed: true }
-          } else {
-            return { ...item, sets: item.sets - 1 }
-          }
+          return { ...item, sets: item.sets - 1 }
         } else {
           return item
         }
