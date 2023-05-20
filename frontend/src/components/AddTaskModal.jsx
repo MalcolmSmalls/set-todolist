@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AddTaskModal({ closeModal, setTasks }) {
+export default function AddTaskModal({ closeModal, setTasks, tasks }) {
   const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
 
   const handleChange = (e) => {
@@ -14,9 +14,15 @@ export default function AddTaskModal({ closeModal, setTasks }) {
     e.preventDefault()
     setTasks((prevTasks) => [
       ...prevTasks,
-      { task: newTask.task, sets: newTask.sets, time: newTask.time },
+      {
+        task: newTask.task,
+        sets: newTask.sets,
+        time: newTask.time,
+        completed: false,
+      },
     ])
     closeModal(false)
+    console.log(tasks)
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
