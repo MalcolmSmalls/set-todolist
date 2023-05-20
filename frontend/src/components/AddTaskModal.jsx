@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { nanoid } from 'nanoid'
 
 export default function AddTaskModal({ closeModal, setTasks, tasks }) {
   const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
@@ -15,6 +16,7 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
     setTasks((prevTasks) => [
       ...prevTasks,
       {
+        id: nanoid(),
         task: newTask.task,
         sets: newTask.sets,
         time: newTask.time,
@@ -39,7 +41,7 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
           onSubmit={handleSubmit}
         >
           <input
-            placeHolder='Task Name'
+            placeholder='Task Name'
             className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
             name='task'
             onChange={handleChange}
@@ -47,14 +49,14 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
           />
           <div className='flex gap-5'>
             <input
-              placeHolder='Sets'
+              placeholder='Sets'
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='sets'
               onChange={handleChange}
               value={newTask.sets}
             />
             <input
-              placeHolder='Minutes per set'
+              placeholder='Minutes per set'
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='time'
               onChange={handleChange}

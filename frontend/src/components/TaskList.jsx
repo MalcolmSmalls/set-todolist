@@ -19,7 +19,7 @@ export default function TaskList({ tasks, setTasks }) {
   const minusSet = (id) => {
     setTasks((prevTasks) => {
       return prevTasks.map((item) => {
-        if (item.id === +id) {
+        if (item.id === id) {
           if (item.sets === 1) {
             return { ...item, sets: item.sets - 1, completed: true }
           } else {
