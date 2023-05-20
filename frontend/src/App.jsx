@@ -1,23 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TaskList from './components/TaskList'
 import AddTaskModal from './components/AddTaskModal'
 
 function App() {
   const [openModal, setOpenModal] = useState(false)
-  const [tasks, setTasks] = useState([
-    { task: 'Get Money', sets: 5, id: 1, completed: false },
-    { task: 'Bicep Curls', sets: 4, id: 2 },
-    { task: 'Read', time: '5hrs', id: 3 },
-    { task: 'Pushups', sets: 2, id: 4 },
-    { task: 'Get Money', sets: 5, id: 5 },
-    { task: 'Bicep Curls', sets: 4, id: 6 },
-    { task: 'Read', time: '5hrs', id: 7 },
-    { task: 'Pushups', sets: 2, id: 8 },
-    { task: 'Get Money', sets: 5, id: 9 },
-    { task: 'Bicep Curls', sets: 4, id: 10 },
-    { task: 'Read', time: '5hrs', id: 11 },
-    { task: 'Pushups', sets: 2, id: 12 },
-  ])
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem('tasks')) || []
+  )
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   return (
     <main className='dark:bg-black bg-gray-800 w-full min-h-screen text-white font-Poppins'>

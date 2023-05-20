@@ -22,7 +22,6 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
       },
     ])
     closeModal(false)
-    console.log(tasks)
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
