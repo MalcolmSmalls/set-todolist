@@ -1,10 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import useComponentVisible from '../hooks/useComponentVisible'
 
 export default function TaskList({ tasks, setTasks }) {
+  const dragItem = useRef()
+  const dragOverItem = useRef()
   const [currentTask, setCurrentTask] = useState('')
   const [showCompleted, setShowCompleted] = useState(false)
   const { ref, isComponentVisible } = useComponentVisible(true)
+
+  const dragStart = (e, position) => {
+    dragItem.current = position
+  }
+
+  const dragEnter = (e, position) => {
+    dragOverItem.current = position
+  }
+
+  const drop = (e) => {
+    const copyListItems = [...tasks]
+    const dragItemContent = copyListItems[dragItem.current]
+    copyListItems.splice(dragItem.current, 1)
+    copyListItems.splice(dragOverItem.current, 0, dragItemContent)
+    dragItem.current = null
+    dragOverItem.current = null
+    setTasks(copyListItems)
+  }
 
   const minusSet = (id) => {
     setTasks((prevTasks) => {
@@ -36,7 +56,7 @@ export default function TaskList({ tasks, setTasks }) {
         {showCompleted ? 'Show Tasks' : 'Show Completed'}
       </button>
       {tasks.length > 0
-        ? tasks.map((item) =>
+        ? tasks.map((item, index) =>
             item.completed === showCompleted ? (
               <div
                 key={item.id}
@@ -46,6 +66,10 @@ export default function TaskList({ tasks, setTasks }) {
                     : 'bg-gray-900'
                 }`}
                 onClick={() => setCurrentTask(item.id)}
+                draggable
+                onDragStart={(e) => dragStart(e, index)}
+                onDragEnter={(e) => dragEnter(e, index)}
+                onDragEnd={drop}
               >
                 <li className='list-none p-3 text-sm flex gap-4 items-center justify-center w-full'>
                   <div className='ml-5 rounded-full border-2 w-5 h-5'></div>
