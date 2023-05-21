@@ -23,13 +23,15 @@ export default function TaskList({ tasks, setTasks }) {
     <div className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'>
       <button
         className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold '
-        onClick={() => setShowCompleted(true)}
+        onClick={() =>
+          setShowCompleted((prevShowCompleted) => !prevShowCompleted)
+        }
       >
-        Completed
+        {showCompleted ? 'Show Tasks' : 'Show Completed'}
       </button>
       {tasks.length > 0
         ? tasks.map((item) =>
-            item.completed === false ? (
+            item.completed === showCompleted ? (
               <div
                 key={item.id}
                 className={`hover:cursor-pointer border-b border-b-gray-200/10 border-b-1 ${
