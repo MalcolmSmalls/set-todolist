@@ -22,7 +22,7 @@ export default function TaskList({ tasks, setTasks }) {
   return (
     <div className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'>
       <button
-        className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold'
+        className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold '
         onClick={() => setShowCompleted(true)}
       >
         Completed
@@ -32,7 +32,7 @@ export default function TaskList({ tasks, setTasks }) {
             item.completed === false ? (
               <div
                 key={item.id}
-                className={`border-b border-b-gray-200/10 border-b-1 ${
+                className={`hover:cursor-pointer border-b border-b-gray-200/10 border-b-1 ${
                   item.id === currentTask ? 'bg-gray-950' : 'bg-gray-900'
                 }`}
                 onClick={() => setCurrentTask(item.id)}
