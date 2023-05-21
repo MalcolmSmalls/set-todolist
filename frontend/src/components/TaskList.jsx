@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import useComponentVisible from '../hooks/useComponentVisible'
 
 export default function TaskList({ tasks, setTasks }) {
   const [currentTask, setCurrentTask] = useState('')
   const [showCompleted, setShowCompleted] = useState(false)
+  const { ref, isComponentVisible } = useComponentVisible(true)
+
   const minusSet = (id) => {
     setTasks((prevTasks) => {
       return prevTasks.map((item) => {
@@ -20,7 +23,10 @@ export default function TaskList({ tasks, setTasks }) {
   }
 
   return (
-    <div className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'>
+    <div
+      ref={ref}
+      className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'
+    >
       <button
         className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold '
         onClick={() =>
@@ -35,7 +41,9 @@ export default function TaskList({ tasks, setTasks }) {
               <div
                 key={item.id}
                 className={`hover:cursor-pointer border-b border-b-gray-200/10 border-b-1 ${
-                  item.id === currentTask ? 'bg-gray-950' : 'bg-gray-900'
+                  item.id === currentTask && isComponentVisible
+                    ? 'bg-gray-950'
+                    : 'bg-gray-900'
                 }`}
                 onClick={() => setCurrentTask(item.id)}
               >
