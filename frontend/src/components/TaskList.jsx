@@ -77,11 +77,16 @@ export default function TaskList({ tasks, setTasks }) {
                     {item.task}
                     <span className='text-indigo-500 text-xs'>
                       {' '}
-                      x{' '}
-                      <span className='font-bold'>
-                        {item.sets} {item.sets > 1 ? 'sets' : 'set'}
-                        {item.time}
-                      </span>
+                      {!item.completed ? (
+                        <span className='font-bold'>
+                          x {item.sets} {item.sets > 1 ? 'sets' : 'set'}
+                          {item.time}
+                        </span>
+                      ) : (
+                        <span className='font-bold uppercase text-green-500'>
+                          Completed
+                        </span>
+                      )}
                     </span>
                   </div>
                   <div className='ml-auto w-1/3  flex justify-center'>
