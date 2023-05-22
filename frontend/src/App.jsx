@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import TaskList from './components/TaskList'
 import AddTaskModal from './components/AddTaskModal'
+import Navbar from './components/Navbar'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
   const [openModal, setOpenModal] = useState(false)
@@ -14,6 +16,11 @@ function App() {
 
   return (
     <main className='dark:bg-black bg-gray-800 w-full min-h-screen text-white font-Poppins'>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Navbar />} />
+        </Routes>
+      </Router>
       <div className='flex justify-center items-center pt-20 flex-col gap-10'>
         <h1 className='text-5xl uppercase tracking-widest font-bold'>
           Sets Todo List
