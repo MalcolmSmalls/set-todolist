@@ -13,17 +13,19 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setTasks((prevTasks) => [
-      ...prevTasks,
-      {
-        id: nanoid(),
-        task: newTask.task,
-        sets: newTask.sets,
-        time: newTask.time,
-        completed: false,
-      },
-    ])
-    closeModal(false)
+    if ((newTask.task !== '' && newTask.sets !== '') || newTask.time !== '') {
+      setTasks((prevTasks) => [
+        ...prevTasks,
+        {
+          id: nanoid(),
+          task: newTask.task,
+          sets: newTask.sets,
+          time: newTask.time,
+          completed: false,
+        },
+      ])
+      closeModal(false)
+    }
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
