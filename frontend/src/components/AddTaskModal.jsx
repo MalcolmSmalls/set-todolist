@@ -3,6 +3,11 @@ import { nanoid } from 'nanoid'
 
 export default function AddTaskModal({ closeModal, setTasks, tasks }) {
   const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
+  const [warning, setWarning] = useState({
+    noTask: false,
+    noSets: false,
+    noTime: false,
+  })
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -25,6 +30,8 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
         },
       ])
       closeModal(false)
+    } else if (!newTask.task) {
+      setWarning((prevWarning) => ({ ...prevWarning, noTask: true }))
     }
   }
   return (
@@ -49,6 +56,9 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
             onChange={handleChange}
             value={newTask.task}
           />
+          {warning.noTask && (
+            <span className='text-red-500 -mt-5'>Must include task name</span>
+          )}
           <div className='flex gap-5'>
             <input
               placeholder='Sets'
