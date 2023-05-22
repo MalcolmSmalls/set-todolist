@@ -18,6 +18,12 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (newTask.task) {
+      setWarning((prevWarning) => ({ ...prevWarning, noTask: false }))
+    }
+    if (newTask.sets) {
+      setWarning((prevWarning) => ({ ...prevWarning, noSets: false }))
+    }
     if ((newTask.task !== '' && newTask.sets !== '') || newTask.time !== '') {
       setTasks((prevTasks) => [
         ...prevTasks,
@@ -31,7 +37,15 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
       ])
       closeModal(false)
     } else if (!newTask.task) {
-      setWarning((prevWarning) => ({ ...prevWarning, noTask: true }))
+      setWarning((prevWarning) => ({
+        ...prevWarning,
+        noTask: true,
+      }))
+    } else if (!newTask.sets) {
+      setWarning((prevWarning) => ({
+        ...prevWarning,
+        noSets: true,
+      }))
     }
   }
   return (
@@ -61,6 +75,7 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
           )}
           <div className='flex gap-5'>
             <input
+              type='number'
               placeholder='Sets'
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='sets'
@@ -68,6 +83,7 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
               value={newTask.sets}
             />
             <input
+              type='number'
               placeholder='Minutes per set'
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='time'
@@ -75,6 +91,11 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
               value={newTask.time}
             />
           </div>
+          {warning.noSets && (
+            <span className='text-red-500 -mt-5'>
+              Must include number of sets
+            </span>
+          )}
           <div className='footer'>
             <button className='bg-green-500 p-3 rounded-lg w-36 mr-5 hover:bg-green-600'>
               Add Task
