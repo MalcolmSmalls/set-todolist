@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+import BottomBar from './components/BottomBar'
 import TaskList from './components/TaskList'
 import AddTaskModal from './components/AddTaskModal'
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
+  const [showBottomBar, setShowBottomBar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem('tasks')) || []
@@ -39,8 +41,14 @@ function App() {
           />
         )}
 
-        <TaskList tasks={tasks} setTasks={setTasks} />
+        <TaskList
+          tasks={tasks}
+          setTasks={setTasks}
+          setShowBottomBar={setShowBottomBar}
+          showBottomBar={showBottomBar}
+        />
       </div>
+      <BottomBar showBottomBar={showBottomBar} />
     </main>
   )
 }

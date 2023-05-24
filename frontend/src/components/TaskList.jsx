@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 import useComponentVisible from '../hooks/useComponentVisible'
 
-export default function TaskList({ tasks, setTasks }) {
+export default function TaskList({
+  tasks,
+  setTasks,
+  setShowBottomBar,
+  showBottomBar,
+}) {
   const dragItem = useRef()
   const dragOverItem = useRef()
   const [currentTask, setCurrentTask] = useState('')
   const [showCompleted, setShowCompleted] = useState(false)
   const { ref, isComponentVisible } = useComponentVisible(true)
 
+  console.log(isComponentVisible)
   const dragStart = (e, position) => {
     dragItem.current = position
   }
@@ -26,6 +32,10 @@ export default function TaskList({ tasks, setTasks }) {
     setTasks(copyListItems)
   }
 
+  const handleClick = (e, id) => {
+    setCurrentTask(id)
+    setShowBottomBar(true)
+  }
   const minusSet = (id) => {
     setTasks((prevTasks) => {
       return prevTasks.map((item) => {
@@ -65,7 +75,7 @@ export default function TaskList({ tasks, setTasks }) {
                     ? 'bg-gray-950'
                     : 'bg-gray-900'
                 }`}
-                onClick={() => setCurrentTask(item.id)}
+                onClick={(e) => handleClick(e, item.id)}
                 draggable
                 onDragStart={(e) => dragStart(e, index)}
                 onDragEnter={(e) => dragEnter(e, index)}
