@@ -23,7 +23,7 @@ function App() {
           <Route path='/' element={<Navbar />} />
         </Routes>
       </Router>
-      <div className='flex justify-center items-center pt-20 flex-col gap-10'>
+      <div className='flex justify-center items-center pt=-10 flex-col gap-10'>
         <h1 className='text-5xl uppercase tracking-widest font-bold'>
           Sets Todo List
         </h1>
