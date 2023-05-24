@@ -3,15 +3,19 @@ import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { SidebarData } from './SidebarData'
+import useComponentVisible from '../hooks/useComponentVisible'
 
 export default function Navbar() {
   const [sidebar, setSidebar] = useState(false)
 
+  const { ref, isComponentVisible } = useComponentVisible(true)
+
   const showSidebar = () => {
     setSidebar((prevSidebar) => !prevSidebar)
   }
+
   return (
-    <>
+    <div className='w-60' ref={ref}>
       <div className='p-5 text-2xl'>
         <Link to='#' onClick={showSidebar}>
           <FaIcons.FaBars />
@@ -19,7 +23,7 @@ export default function Navbar() {
       </div>
       <nav
         className={
-          sidebar
+          sidebar && isComponentVisible
             ? 'left-0 fixed  duration-300'
             : 'left-[-100%] fixed  duration-700'
         }
@@ -49,6 +53,6 @@ export default function Navbar() {
           })}
         </ul>
       </nav>
-    </>
+    </div>
   )
 }

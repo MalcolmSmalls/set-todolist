@@ -6,8 +6,7 @@ export default function TaskList({ tasks, setTasks, setShowBottomBar }) {
   const dragOverItem = useRef()
   const [currentTask, setCurrentTask] = useState('')
   const [showCompleted, setShowCompleted] = useState(false)
-  const { ref, isComponentVisible } = useComponentVisible(true)
-  console.log(ref, isComponentVisible)
+  const { ref, isComponentVisible } = useComponentVisible(false)
 
   useEffect(() => {
     setShowBottomBar(isComponentVisible)
