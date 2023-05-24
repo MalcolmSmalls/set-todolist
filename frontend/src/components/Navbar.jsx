@@ -10,14 +10,14 @@ export default function Navbar() {
 
   const { ref, isComponentVisible } = useComponentVisible(true)
 
-  const showSidebar = () => {
+  const showSidebar = (boolean) => {
     setSidebar((prevSidebar) => !prevSidebar)
   }
 
   return (
     <div className='w-60' ref={ref}>
       <div className='p-5 text-2xl'>
-        <Link to='#' onClick={showSidebar}>
+        <Link to='#' onClick={() => setSidebar(true)}>
           <FaIcons.FaBars />
         </Link>
       </div>
@@ -30,7 +30,7 @@ export default function Navbar() {
       >
         <ul className='bg-gray-950 h-screen w-60 flex pt-10  flex-col fixed top-0'>
           <li className='p-3 text-2xl w-full'>
-            <Link to='#' onClick={showSidebar}>
+            <Link to='#' onClick={() => setSidebar(false)}>
               <AiIcons.AiOutlineClose />
             </Link>
           </li>
