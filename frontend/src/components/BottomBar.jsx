@@ -8,6 +8,8 @@ export default function BottomBar({
   openModal,
   setTasks,
   setOpenModal,
+  editing,
+  setEditing,
 }) {
   const buttonStyle = {
     textTransform: 'uppercase',
@@ -33,6 +35,11 @@ export default function BottomBar({
           : item
       )
     )
+  }
+
+  const handleEdit = () => {
+    setOpenModal(true)
+    setEditing(true)
   }
   return (
     <div
@@ -62,7 +69,7 @@ export default function BottomBar({
         </button>
         <button
           style={buttonStyle}
-          onClick={() => setOpenModal(true)}
+          onClick={handleEdit}
           className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white'
         >
           Edit Task
@@ -77,8 +84,10 @@ export default function BottomBar({
         {openModal && (
           <AddTaskModal
             closeModal={setOpenModal}
+            editing={editing}
             setTasks={setTasks}
             tasks={tasks}
+            currentTask={currentTask}
           />
         )}
       </div>

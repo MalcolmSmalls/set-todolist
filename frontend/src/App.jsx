@@ -40,6 +40,7 @@ function App() {
             closeModal={setOpenModal}
             setTasks={setTasks}
             tasks={tasks}
+            editing={editing}
           />
         )}
 
@@ -59,6 +60,8 @@ function App() {
         setTasks={setTasks}
         setOpenModal={setOpenModal}
         openModal={openModal}
+        setEditing={setEditing}
+        editing={editing}
       />
     </main>
   )

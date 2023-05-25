@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 
-export default function AddTaskModal({ closeModal, setTasks }) {
+export default function AddTaskModal({
+  closeModal,
+  setTasks,
+  editing,
+  currentTask,
+  tasks,
+}) {
   const [newTask, setNewTask] = useState({
     task: '',
     sets: '',
@@ -22,6 +28,18 @@ export default function AddTaskModal({ closeModal, setTasks }) {
     })
   }
 
+  console.log(newTask)
+
+  useEffect(() => {
+    if (editing) {
+      const currentTaskDetailed = tasks.filter(
+        (item) => item.id === currentTask
+      )
+      setNewTask(currentTaskDetailed[0])
+    }
+  }, [editing])
+
+  console.log()
   const handleSubmit = (e) => {
     e.preventDefault()
     if (newTask.task) {
@@ -65,7 +83,9 @@ export default function AddTaskModal({ closeModal, setTasks }) {
           </button>
         </div>
         <div className='title'>
-          <h1 className='uppercase text-xl'>Add A Task</h1>
+          <h1 className='uppercase text-xl'>
+            {editing ? 'Edit Task' : 'Add A Task'}
+          </h1>
         </div>
         <form
           className='body pt-5 flex flex-col gap-5 w-1/2 items-center pb-5'
@@ -76,7 +96,7 @@ export default function AddTaskModal({ closeModal, setTasks }) {
             className='w-full outline-0 rounded h-10 p-2 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
             name='task'
             onChange={handleChange}
-            value={newTask.task}
+            value={editing ? newTask?.task : newTask.task}
           />
           {warning.noTask && (
             <span className='text-red-500 -mt-5'>Must include task name</span>
@@ -88,7 +108,7 @@ export default function AddTaskModal({ closeModal, setTasks }) {
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='sets'
               onChange={handleChange}
-              value={newTask.sets}
+              value={editing ? newTask?.initialSets : newTask.sets}
             />
             <input
               type='number'
@@ -96,7 +116,7 @@ export default function AddTaskModal({ closeModal, setTasks }) {
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='time'
               onChange={handleChange}
-              value={newTask.time}
+              value={editing ? newTask?.initialTime : newTask.time}
             />
           </div>
           {warning.noSets && (
@@ -106,7 +126,7 @@ export default function AddTaskModal({ closeModal, setTasks }) {
           )}
           <div className='footer'>
             <button className='bg-green-500 p-3 rounded-lg w-36 mr-5 hover:bg-green-600'>
-              Add Task
+              {editing ? 'Edit' : 'Add'} Task
             </button>
             <button
               type='button'
