@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { nanoid } from 'nanoid'
 
-export default function AddTaskModal({ closeModal, setTasks, tasks }) {
-  const [newTask, setNewTask] = useState({ task: '', sets: '', time: '' })
+export default function AddTaskModal({ closeModal, setTasks }) {
+  const [newTask, setNewTask] = useState({
+    task: '',
+    sets: '',
+    time: '',
+    initialSets: '',
+    initialTime: '',
+  })
   const [warning, setWarning] = useState({
     noTask: false,
     noSets: false,
@@ -32,6 +38,8 @@ export default function AddTaskModal({ closeModal, setTasks, tasks }) {
           task: newTask.task,
           sets: newTask.sets,
           time: newTask.time,
+          initialTime: newTask.time,
+          initialSets: newTask.sets,
           completed: false,
         },
       ])

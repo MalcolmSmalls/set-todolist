@@ -21,6 +21,14 @@ export default function BottomBar({
   const handleDelete = () => {
     setTasks((prevTasks) => prevTasks.filter((item) => item.id !== currentTask))
   }
+
+  const handleReset = () => {
+    setTasks((prevTasks) =>
+      prevTasks.map((item) =>
+        item.id === currentTask ? { ...item, sets: item.initialSets } : item
+      )
+    )
+  }
   return (
     <div
       className={
@@ -56,6 +64,7 @@ export default function BottomBar({
         <button
           style={buttonStyle}
           className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white'
+          onClick={handleReset}
         >
           Reset Sets
         </button>
