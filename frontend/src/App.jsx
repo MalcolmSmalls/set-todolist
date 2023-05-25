@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
   const [currentTask, setCurrentTask] = useState('')
+  const [editing, setEditing] = useState(false)
   const [showBottomBar, setShowBottomBar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [tasks, setTasks] = useState(
@@ -56,6 +57,8 @@ function App() {
         currentTask={currentTask}
         tasks={tasks}
         setTasks={setTasks}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
       />
     </main>
   )

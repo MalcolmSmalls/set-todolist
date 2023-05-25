@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import AddTaskModal from './AddTaskModal'
 
 export default function BottomBar({
   showBottomBar,
   currentTask,
   tasks,
+  openModal,
   setTasks,
+  setOpenModal,
 }) {
   const buttonStyle = {
     textTransform: 'uppercase',
@@ -25,7 +28,9 @@ export default function BottomBar({
   const handleReset = () => {
     setTasks((prevTasks) =>
       prevTasks.map((item) =>
-        item.id === currentTask ? { ...item, sets: item.initialSets } : item
+        item.id === currentTask
+          ? { ...item, sets: item.initialSets, completed: false }
+          : item
       )
     )
   }
@@ -57,6 +62,7 @@ export default function BottomBar({
         </button>
         <button
           style={buttonStyle}
+          onClick={() => setOpenModal(true)}
           className='hover:bg-indigo-500 hover:border-indigo-500 hover:text-white'
         >
           Edit Task
@@ -68,6 +74,13 @@ export default function BottomBar({
         >
           Reset Sets
         </button>
+        {openModal && (
+          <AddTaskModal
+            closeModal={setOpenModal}
+            setTasks={setTasks}
+            tasks={tasks}
+          />
+        )}
       </div>
     </div>
   )
