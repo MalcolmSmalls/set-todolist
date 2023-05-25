@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import useComponentVisible from '../hooks/useComponentVisible'
 
-export default function TaskList({ tasks, setTasks, setShowBottomBar }) {
+export default function TaskList({
+  tasks,
+  setTasks,
+  setShowBottomBar,
+  currentTask,
+  setCurrentTask,
+}) {
   const dragItem = useRef()
   const dragOverItem = useRef()
-  const [currentTask, setCurrentTask] = useState('')
+
   const [showCompleted, setShowCompleted] = useState(false)
   const { ref, isComponentVisible } = useComponentVisible(false)
 

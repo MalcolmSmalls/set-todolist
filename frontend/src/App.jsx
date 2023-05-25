@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
+  const [currentTask, setCurrentTask] = useState('')
   const [showBottomBar, setShowBottomBar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [tasks, setTasks] = useState(
@@ -42,13 +43,20 @@ function App() {
         )}
 
         <TaskList
+          currentTask={currentTask}
+          setCurrentTask={setCurrentTask}
           tasks={tasks}
           setTasks={setTasks}
           setShowBottomBar={setShowBottomBar}
           showBottomBar={showBottomBar}
         />
       </div>
-      <BottomBar showBottomBar={showBottomBar} />
+      <BottomBar
+        showBottomBar={showBottomBar}
+        currentTask={currentTask}
+        tasks={tasks}
+        setTasks={setTasks}
+      />
     </main>
   )
 }
