@@ -39,7 +39,6 @@ export default function AddTaskModal({
     }
   }, [editing])
 
-  console.log()
   const handleSubmit = (e) => {
     e.preventDefault()
     if (newTask.task) {
@@ -48,21 +47,8 @@ export default function AddTaskModal({
     if (newTask.sets) {
       setWarning((prevWarning) => ({ ...prevWarning, noSets: false }))
     }
-    if ((newTask.task !== '' && newTask.sets !== '') || newTask.time !== '') {
-      setTasks((prevTasks) => [
-        ...prevTasks,
-        {
-          id: nanoid(),
-          task: newTask.task,
-          sets: newTask.sets,
-          time: newTask.time,
-          initialTime: newTask.time,
-          initialSets: newTask.sets,
-          completed: false,
-        },
-      ])
-      closeModal(false)
-    } else if (!newTask.task) {
+
+    if (!newTask.task) {
       setWarning((prevWarning) => ({
         ...prevWarning,
         noTask: true,
@@ -72,6 +58,42 @@ export default function AddTaskModal({
         ...prevWarning,
         noSets: true,
       }))
+    }
+
+    if (editing) {
+      if ((newTask.task !== '' && newTask.sets !== '') || newTask.time !== '') {
+        setTasks((prevTasks) =>
+          prevTasks.map((item) => {
+            return item.id === currentTask
+              ? {
+                  ...item,
+                  task: newTask.task,
+                  sets: newTask.sets,
+                  time: newTask.time,
+                  initialTime: newTask.time,
+                  initialSets: newTask.sets,
+                }
+              : item
+          })
+        )
+        closeModal(false)
+      }
+    } else if (!editing) {
+      if ((newTask.task !== '' && newTask.sets !== '') || newTask.time !== '') {
+        setTasks((prevTasks) => [
+          ...prevTasks,
+          {
+            id: nanoid(),
+            task: newTask.task,
+            sets: newTask.sets,
+            time: newTask.time,
+            initialTime: newTask.time,
+            initialSets: newTask.sets,
+            completed: false,
+          },
+        ])
+        closeModal(false)
+      }
     }
   }
   return (
