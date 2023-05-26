@@ -46,7 +46,6 @@ function App() {
             setTasks={setTasks}
             tasks={tasks}
             editing={editing}
-            setCurrentTask={setCurrentTask}
           />
         )}
 

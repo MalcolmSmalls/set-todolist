@@ -7,7 +7,6 @@ export default function AddTaskModal({
   editing,
   currentTask,
   tasks,
-  setCurrentTask,
 }) {
   const [newTask, setNewTask] = useState({
     task: '',

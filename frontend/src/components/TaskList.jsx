@@ -44,7 +44,7 @@ export default function TaskList({
     setTasks((prevTasks) => {
       return prevTasks.map((item) => {
         if (item.id === id) {
-          if (item.sets === 1) {
+          if (item.sets == 1) {
             return { ...item, sets: item.sets - 1, completed: true }
           } else {
             return { ...item, sets: item.sets - 1 }
