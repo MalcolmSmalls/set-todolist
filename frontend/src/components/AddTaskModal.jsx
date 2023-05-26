@@ -7,6 +7,7 @@ export default function AddTaskModal({
   editing,
   currentTask,
   tasks,
+  setCurrentTask,
 }) {
   const [newTask, setNewTask] = useState({
     task: '',
@@ -27,8 +28,6 @@ export default function AddTaskModal({
       return { ...prevTask, [name]: type === 'checkbox' ? checked : value }
     })
   }
-
-  console.log(newTask)
 
   useEffect(() => {
     if (editing) {
@@ -96,6 +95,11 @@ export default function AddTaskModal({
       }
     }
   }
+
+  const handleClose = () => {
+    closeModal(false)
+  }
+
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
       <div className='modalContainer bg-gray-900 w-1/2 h-96 flex flex-col items-center rounded-lg gap-5 shadow-2xl'>
@@ -153,7 +157,7 @@ export default function AddTaskModal({
             <button
               type='button'
               className='bg-red-500 p-3 rounded-lg w-36  hover:bg-red-600'
-              onClick={() => closeModal(false)}
+              onClick={handleClose}
             >
               Cancel
             </button>

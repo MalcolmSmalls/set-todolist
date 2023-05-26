@@ -18,6 +18,11 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
+  const handleOpenModal = () => {
+    setEditing(false)
+    setOpenModal(true)
+  }
+
   return (
     <main className='dark:bg-black bg-gray-800 w-full min-h-screen text-white font-Poppins'>
       <Router>
@@ -30,7 +35,7 @@ function App() {
           Sets Todo List
         </h1>
         <button
-          onClick={() => setOpenModal(true)}
+          onClick={handleOpenModal}
           className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-10 uppercase font-bold hover:bg-gray-950 hover:text-white'
         >
           <i className='fas fa-plus pr-2'></i>Add Task
@@ -41,6 +46,7 @@ function App() {
             setTasks={setTasks}
             tasks={tasks}
             editing={editing}
+            setCurrentTask={setCurrentTask}
           />
         )}
 
