@@ -103,7 +103,7 @@ export default function AddTaskModal({
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 flex justify-center items-center backdrop-blur-sm'>
       <div className='modalContainer bg-gray-900 w-1/2 h-96 flex flex-col items-center rounded-lg gap-5 shadow-2xl'>
         <div className='ml-auto pt-3 pr-4'>
-          <button onClick={() => closeModal(false)}>
+          <button onClick={handleClose}>
             <i className='fas fa-xmark text-3xl'></i>
           </button>
         </div>

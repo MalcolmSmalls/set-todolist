@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import useComponentVisible from '../hooks/useComponentVisible'
+import Timer from './Timer'
 
 export default function TaskList({
   tasks,
@@ -13,6 +14,7 @@ export default function TaskList({
 
   const [showCompleted, setShowCompleted] = useState(false)
   const { ref, isComponentVisible } = useComponentVisible(false)
+  const [openTimer, setOpenTimer] = useState(false)
 
   useEffect(() => {
     setShowBottomBar(isComponentVisible)
@@ -61,6 +63,7 @@ export default function TaskList({
       ref={ref}
       className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'
     >
+      {openTimer && <Timer setOpenTimer={setOpenTimer} />}
       <button
         className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold '
         onClick={() =>
@@ -69,6 +72,7 @@ export default function TaskList({
       >
         {showCompleted ? 'Show Tasks' : 'Show Completed'}
       </button>
+
       {tasks.length > 0
         ? tasks.map((item, index) =>
             item.completed === showCompleted ? (
@@ -109,6 +113,7 @@ export default function TaskList({
                         className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
                 hover:border-indigo-500 
                  hover:text-white '
+                        onClick={() => setOpenTimer(true)}
                       >
                         Start Time
                       </button>
