@@ -130,7 +130,7 @@ export default function AddTaskModal({
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='sets'
               onChange={handleChange}
-              value={editing ? newTask?.initialSets : newTask.sets}
+              value={editing ? newTask?.sets : newTask.sets}
             />
             <input
               type='number'
@@ -138,7 +138,7 @@ export default function AddTaskModal({
               className='w-1/2 rounded h-10 p-2 outline-0 focus:ring-2 focus:ring-inset focus:ring-indigo-500 ring-2 ring-inset ring-gray-300 text-gray-900'
               name='time'
               onChange={handleChange}
-              value={editing ? newTask?.initialTime : newTask.time}
+              value={editing ? newTask?.time : newTask.time}
             />
           </div>
           {warning.noSets && (
