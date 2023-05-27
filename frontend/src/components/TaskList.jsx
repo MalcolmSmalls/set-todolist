@@ -14,8 +14,9 @@ export default function TaskList({
 
   const [showCompleted, setShowCompleted] = useState(false)
   const { ref, isComponentVisible } = useComponentVisible(false)
-  const [openTimer, setOpenTimer] = useState(false)
+  const [newTimer, setNewTimer] = useState({ status: false, time: '' })
 
+  console.log(newTimer)
   useEffect(() => {
     setShowBottomBar(isComponentVisible)
   }, [isComponentVisible])
@@ -58,12 +59,18 @@ export default function TaskList({
     })
   }
 
+  const handleTimer = (time) => {
+    setNewTimer({ status: true, time: time })
+  }
+
   return (
     <div
       ref={ref}
       className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'
     >
-      {openTimer && <Timer setOpenTimer={setOpenTimer} />}
+      {newTimer.status && (
+        <Timer time={newTimer.time} setNewTimer={setNewTimer} />
+      )}
       <button
         className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold '
         onClick={() =>
@@ -113,7 +120,7 @@ export default function TaskList({
                         className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
                 hover:border-indigo-500 
                  hover:text-white '
-                        onClick={() => setOpenTimer(true)}
+                        onClick={() => handleTimer(item.time)}
                       >
                         Start Time
                       </button>
