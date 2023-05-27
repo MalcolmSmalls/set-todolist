@@ -31,14 +31,10 @@ export default function Timer({ setNewTimer, time }) {
   }
 
   const clearTimer = (e) => {
-    // If you adjust it you should also need to
-    // adjust the Endtime formula we are about
-    // to code next
-    setTimer('00:00:10')
+    // setTimer('00:00:10')
+    // console.log(getTimeRemaining(e))
+    startTimer(e)
 
-    // If you try to remove this line the
-    // updating of timer Variable will be
-    // after 1000ms or 1sec
     if (Ref.current) clearInterval(Ref.current)
     const id = setInterval(() => {
       startTimer(e)
@@ -46,30 +42,19 @@ export default function Timer({ setNewTimer, time }) {
     Ref.current = id
   }
 
-  const getDeadTime = () => {
+  const getDeadTime = (time) => {
     let deadline = new Date()
 
-    // This is where you need to adjust if
-    // you entend to add more time
-    deadline.setSeconds(deadline.getSeconds() + 10)
+    deadline.setSeconds(deadline.getSeconds() + time * 60)
     return deadline
   }
 
-  // We can use useEffect so that when the component
-  // mount the timer will start as soon as possible
-
-  // We put empty array to act as componentDid
-  // mount only
   useEffect(() => {
-    clearTimer(getDeadTime())
+    clearTimer(getDeadTime(time))
   }, [])
 
-  // Another way to call the clearTimer() to start
-  // the countdown is via action event from the
-  // button first we create function to be called
-  // by the button
   const onClickReset = () => {
-    clearTimer(getDeadTime())
+    clearTimer(getDeadTime(time))
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 left-0 flex justify-center items-center backdrop-blur-sm'>

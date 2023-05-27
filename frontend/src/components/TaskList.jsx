@@ -16,7 +16,6 @@ export default function TaskList({
   const { ref, isComponentVisible } = useComponentVisible(false)
   const [newTimer, setNewTimer] = useState({ status: false, time: '' })
 
-  console.log(newTimer)
   useEffect(() => {
     setShowBottomBar(isComponentVisible)
   }, [isComponentVisible])
