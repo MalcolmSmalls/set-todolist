@@ -30,10 +30,12 @@ export default function Timer({ setNewTimer, time }) {
     }
   }
 
-  const clearTimer = (e) => {
-    // setTimer('00:00:10')
-    // console.log(getTimeRemaining(e))
+  const initialTimer = (e) => {
     startTimer(e)
+  }
+
+  const clearTimer = (e) => {
+    initialTimer(e)
 
     if (Ref.current) clearInterval(Ref.current)
     const id = setInterval(() => {
@@ -50,7 +52,7 @@ export default function Timer({ setNewTimer, time }) {
   }
 
   useEffect(() => {
-    clearTimer(getDeadTime(time))
+    initialTimer(getDeadTime(time))
   }, [])
 
   const onClickReset = () => {
@@ -67,7 +69,17 @@ export default function Timer({ setNewTimer, time }) {
         <div className='title'>
           <h1 className='uppercase text-xl'>Timer</h1>
         </div>
-        {timer}
+        <div className='text-5xl'>{timer}</div>
+        <div>
+          <button
+            className='uppercase border-[1px] p-2 rounded-lg text-base hover:bg-indigo-500 
+                hover:border-indigo-500 
+                 hover:text-white '
+            onClick={onClickReset}
+          >
+            Start Timer
+          </button>
+        </div>
         <div className='footer'>
           <button
             className='bg-green-500 p-3 rounded-lg w-36 mr-5 hover:bg-green-600'
