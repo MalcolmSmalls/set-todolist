@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 
 export default function Timer({ setNewTimer, time }) {
   const [timer, setTimer] = useState('00:00:00')
+  const [timerStarted, setTimerStarted] = useState(false)
+  const [timerEnds, setTimerEnds] = useState()
   const Ref = useRef(null)
 
   const getTimeRemaining = (e) => {
@@ -32,10 +34,11 @@ export default function Timer({ setNewTimer, time }) {
 
   const initialTimer = (e) => {
     startTimer(e)
+    if (Ref.current) clearInterval(Ref.current)
   }
 
   const clearTimer = (e) => {
-    initialTimer(e)
+    // initialTimer(e)
 
     if (Ref.current) clearInterval(Ref.current)
     const id = setInterval(() => {
@@ -48,6 +51,7 @@ export default function Timer({ setNewTimer, time }) {
     let deadline = new Date()
 
     deadline.setSeconds(deadline.getSeconds() + time * 60)
+    if (!timerStarted) setTimerEnds(deadline)
     return deadline
   }
 
@@ -55,8 +59,24 @@ export default function Timer({ setNewTimer, time }) {
     initialTimer(getDeadTime(time))
   }, [])
 
-  const onClickReset = () => {
+  const onClickPause = () => {
+    setTimerStarted(false)
+    const newTime = Date.parse(timerEnds) - Date.parse(new Date())
+    console.log(newTime)
+
+    // console.log(Date.parse(getDeadTime(time)))
+    // console.log(Date.parse(new Date()))
+
+    // console.log(newTime)
+    console.log(timerEnds)
+  }
+
+  const onClickStart = () => {
     clearTimer(getDeadTime(time))
+    setTimerStarted(true)
+  }
+  const onClickReset = () => {
+    initialTimer(getDeadTime(time))
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 left-0 flex justify-center items-center backdrop-blur-sm'>
@@ -75,9 +95,9 @@ export default function Timer({ setNewTimer, time }) {
             className='uppercase border-[1px] p-2 rounded-lg text-base hover:bg-indigo-500 
                 hover:border-indigo-500 
                  hover:text-white '
-            onClick={onClickReset}
+            onClick={timerStarted ? onClickPause : onClickStart}
           >
-            Start Timer
+            {timerStarted ? 'Pause' : 'Start'} Timer
           </button>
         </div>
         <div className='footer'>
