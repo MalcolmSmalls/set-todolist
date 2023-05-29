@@ -3,8 +3,10 @@ import React, { useState, useRef, useEffect } from 'react'
 export default function Timer({ setNewTimer, time }) {
   const [timer, setTimer] = useState('00:00:00')
   const [timerStarted, setTimerStarted] = useState(false)
-  const [timerEnds, setTimerEnds] = useState()
+  const [timerEnds, setTimerEnds] = useState('')
   const Ref = useRef(null)
+
+  let newTime = time
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date())
@@ -51,7 +53,7 @@ export default function Timer({ setNewTimer, time }) {
     let deadline = new Date()
 
     deadline.setSeconds(deadline.getSeconds() + time * 60)
-    if (!timerStarted) setTimerEnds(deadline)
+    if (!timerStarted) setTimerEnds(deadline.getSeconds())
     return deadline
   }
 
@@ -70,6 +72,8 @@ export default function Timer({ setNewTimer, time }) {
     // console.log(newTime)
     console.log(timerEnds)
   }
+
+  console.log(timerEnds)
 
   const onClickStart = () => {
     clearTimer(getDeadTime(time))
@@ -97,7 +101,12 @@ export default function Timer({ setNewTimer, time }) {
                  hover:text-white '
             onClick={timerStarted ? onClickPause : onClickStart}
           >
-            {timerStarted ? 'Pause' : 'Start'} Timer
+            {timerStarted
+              ? 'Pause'
+              : !timerEnds && !timerStarted
+              ? 'Start'
+              : 'Resume'}{' '}
+            Timer
           </button>
         </div>
         <div className='footer'>
