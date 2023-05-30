@@ -101,12 +101,7 @@ export default function Timer({ setNewTimer, time }) {
                  hover:text-white '
             onClick={timerStarted ? onClickPause : onClickStart}
           >
-            {timerStarted
-              ? 'Pause'
-              : !timerEnds && !timerStarted
-              ? 'Start'
-              : 'Resume'}{' '}
-            Timer
+            {timerStarted ? 'Pause' : !timerStarted ? 'Start' : 'Resume'} Timer
           </button>
         </div>
         <div className='footer'>
