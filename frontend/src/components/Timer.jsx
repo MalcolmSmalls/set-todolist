@@ -50,6 +50,11 @@ export default function Timer({ setNewTimer, time }) {
     Ref.current = id
   }
 
+  const resetTimer = (e) => {
+    if (Ref.current) clearInterval(Ref.current)
+    startTimer(e)
+  }
+
   const getDeadTime = (time) => {
     let deadline = new Date()
 
@@ -81,7 +86,9 @@ export default function Timer({ setNewTimer, time }) {
     setTimerStarted(true)
   }
   const onClickReset = () => {
-    initialTimer(getDeadTime(time))
+    resetTimer(getDeadTime(time))
+    setNewPausedTime('')
+    setTimerStarted(false)
   }
   return (
     <div className='backgroundBlur bg-black/50 w-[100vw] h-[100vh] fixed top-0 left-0 flex justify-center items-center backdrop-blur-sm'>
