@@ -58,8 +58,9 @@ export default function TaskList({
     })
   }
 
-  const handleTimer = (time) => {
-    setNewTimer({ status: true, time: time })
+  const handleTimer = (e, time) => {
+    console.log(e)
+    setNewTimer({ status: true, time: time, id: e.target.id })
   }
 
   return (
@@ -68,7 +69,12 @@ export default function TaskList({
       className='bg-gray-900 text-gray-300 w-1/2 h-50 rounded-lg shadow-lg h-fit mb-20'
     >
       {newTimer.status && (
-        <Timer time={newTimer.time} setNewTimer={setNewTimer} />
+        <Timer
+          setTasks={setTasks}
+          time={newTimer.time}
+          setNewTimer={setNewTimer}
+          newTimer={newTimer}
+        />
       )}
       <button
         className='h-10 flex justify-center w-full hover:bg-gray-950 items-center uppercase rounded-lg hover:text-white font-bold '
@@ -116,10 +122,11 @@ export default function TaskList({
                   <div className='ml-auto w-1/3  flex justify-center'>
                     {item.time ? (
                       <button
+                        id={item.id}
                         className='uppercase border-[1px] p-2 rounded-lg text-xs hover:bg-indigo-500 
                 hover:border-indigo-500 
                  hover:text-white '
-                        onClick={() => handleTimer(item.time)}
+                        onClick={(e) => handleTimer(e, item.time)}
                       >
                         Start Time
                       </button>

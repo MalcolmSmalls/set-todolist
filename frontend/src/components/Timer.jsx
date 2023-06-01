@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-export default function Timer({ setNewTimer, time }) {
-  const [timer, setTimer] = useState('00:00:00')
+export default function Timer({ setNewTimer, time, newTimer, setTasks }) {
+  const [timer, setTimer] = useState('')
   const [timerStarted, setTimerStarted] = useState(false)
   const [timerEnds, setTimerEnds] = useState('')
   const [newPausedTime, setNewPausedTime] = useState('')
@@ -21,6 +21,25 @@ export default function Timer({ setNewTimer, time }) {
       seconds,
     }
   }
+
+  useEffect(() => {
+    if (timer === '00:00:00') {
+      setTasks((prevTasks) => {
+        return prevTasks.map((item) => {
+          if (item.id === newTimer.id) {
+            if (item.sets == 1) {
+              return { ...item, sets: item.sets - 1, completed: true }
+            } else {
+              return { ...item, sets: item.sets - 1 }
+            }
+          } else {
+            return item
+          }
+        })
+      })
+      setNewTimer({ status: false, time: '', id: newTimer.id })
+    }
+  }, [timer])
 
   const startTimer = (e) => {
     let { total, hours, minutes, seconds } = getTimeRemaining(e)
@@ -71,7 +90,6 @@ export default function Timer({ setNewTimer, time }) {
     setTimerStarted(false)
     const newTime = Date.parse(timerEnds) - Date.parse(new Date())
     setNewPausedTime(newTime / 1000 / 60)
-    console.log(newTime)
 
     if (Ref.current) clearInterval(Ref.current)
   }
